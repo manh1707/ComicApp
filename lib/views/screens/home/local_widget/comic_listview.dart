@@ -1,16 +1,15 @@
+import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
 import 'package:comic_app/main.dart';
 import 'package:comic_app/views/screens/home/local_widget/comic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../controllers/root_controller/root_controller.dart';
 
 class ComicListView extends StatelessWidget {
   const ComicListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final RootController controller = Get.find();
+    final ComicController controller = Get.find();
     double height = 300;
     return Stack(children: [
       Container(
@@ -55,7 +54,6 @@ class ComicListView extends StatelessWidget {
           ),
         ),
       ),
-      Text(controller.comicList.value[0].totalView.toString())
     ]);
   }
 }

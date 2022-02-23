@@ -1,8 +1,12 @@
 import 'package:comic_app/views/screens/comic_details/comic_details_screen.dart';
+import 'package:comic_app/views/screens/read_comic/read_comic.dart';
 import 'package:comic_app/views/screens/root.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'controllers/comic_controller/comic_controller.dart';
+import 'controllers/root_controller/root_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,9 +34,19 @@ class MyApp extends StatelessWidget {
 abstract class Routes {
   static const root = '/root';
   static const detail = '/detail';
+  static const read = '/read';
 }
 
 final routePages = [
-  GetPage(name: Routes.root, page: () => const Root()),
-  GetPage(name: Routes.detail, page: () => const ComicDetailScreen())
+  GetPage(name: Routes.root, page: () => Root(), binding: RootBinding()),
+  GetPage(name: Routes.detail, page: () => ComicDetailScreen()),
+  GetPage(name: Routes.read, page: () => ReadComicScreen())
 ];
+
+class RootBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(() => RootController());
+    Get.lazyPut(() => ComicController());
+  }
+}

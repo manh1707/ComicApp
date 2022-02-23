@@ -1,30 +1,26 @@
-import 'dart:convert';
-
 import 'package:comic_app/models/chap_model.dart';
 import 'package:comic_app/models/comment_model.dart';
 
 class ComicModel {
-  String? id;
-  String? name;
-  String? description;
-  String? imageURL;
-  String? author;
-  int? comicView;
-  List<ChapModel>? chaps;
-  DateTime? upDateDay;
-  List<CommentModel>? comment;
-  bool? isDone;
+  String id;
+  String name;
+  String description;
+  String imageURL;
+  String author;
+  List<ChapModel> chaps;
+  DateTime upDateDay;
+  List<CommentModel> comments;
+  bool isDone;
   ComicModel({
-    this.id,
-    this.name,
-    this.description,
-    this.imageURL,
-    this.author,
-    this.comicView,
-    this.comment,
-    this.chaps,
-    this.upDateDay,
-    this.isDone,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.imageURL,
+    required this.author,
+    required this.comments,
+    required this.chaps,
+    required this.upDateDay,
+    required this.isDone,
   });
   Map<String, dynamic> toMap() {
     return {
@@ -35,17 +31,21 @@ class ComicModel {
       'author': author,
       'chap': chaps,
       'updateDay': upDateDay,
-      'comment': comment,
+      'comment': comments,
       'isDone': isDone
     };
   }
 
+  int get CommentAmount {
+    return comments.length;
+  }
+
   int get totalView {
     int view = 0;
-    if (chaps!.isNotEmpty)
+    if (chaps.isNotEmpty)
 
       // ignore: curly_braces_in_flow_control_structures
-      for (var element in chaps!) {
+      for (var element in chaps) {
         view += element.chapView!;
       }
     return view;
@@ -61,7 +61,7 @@ class ComicModel {
       chaps:
           List<ChapModel>.from(map['chap'].map((x) => ChapModel.fromJson(x))),
       upDateDay: map['updateDay'] ?? DateTime.now(),
-      comment: map['comment'] ?? [],
+      comments: map['comment'] ?? [],
       isDone: map['isDone'] ?? false,
     );
   }

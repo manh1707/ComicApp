@@ -29,33 +29,33 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      height: 30,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                fillColor: Colors.black,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                contentPadding:
-                                    const EdgeInsets.only(bottom: 10, left: 20),
-                                hintText: 'Tìm kiếm...',
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          const Icon(Icons.search)
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   height: 30,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Expanded(
+                    //         child: TextField(
+                    //           decoration: InputDecoration(
+                    //             fillColor: Colors.black,
+                    //             border: OutlineInputBorder(
+                    //               borderRadius: BorderRadius.circular(15),
+                    //             ),
+                    //             contentPadding:
+                    //                 const EdgeInsets.only(bottom: 10, left: 20),
+                    //             hintText: 'Tìm kiếm...',
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       const SizedBox(
+                    //         width: 20,
+                    //       ),
+                    //       const Icon(Icons.search)
+                    //     ],
+                    //   ),
+                    // ),
                     const SizedBox(
-                      height: 10,
+                      height: 50,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

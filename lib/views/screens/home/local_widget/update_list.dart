@@ -3,14 +3,14 @@ import 'package:comic_app/views/screens/home/local_widget/comic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/root_controller/root_controller.dart';
+import '../../../../controllers/comic_controller/comic_controller.dart';
 
 class Updatelist extends StatelessWidget {
   const Updatelist({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final RootController controller = Get.find();
+    final ComicController controller = Get.find();
     return GridView.builder(
         itemCount: 4,
         shrinkWrap: true,

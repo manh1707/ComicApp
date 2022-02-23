@@ -1,3 +1,5 @@
+import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
+import 'package:comic_app/views/screens/widget/Loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,11 +9,12 @@ class Root extends StatelessWidget {
   const Root({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final rootController = Get.put(RootController());
-    return GetBuilder<RootController>(
-      builder: (_) => (rootController.isLoading == true)
-          ? Center(child: CircularProgressIndicator())
-          : Scaffold(
+    ComicController comicController = Get.find();
+    RootController rootController = Get.find();
+    return Obx(() => (comicController.isLoading == true)
+        ? LoadingIndicator()
+        : GetBuilder<RootController>(
+            builder: (_) => Scaffold(
               body: rootController.currentScreen,
               bottomNavigationBar: BottomNavigationBar(
                 unselectedItemColor: Colors.black,
@@ -30,7 +33,7 @@ class Root extends StatelessWidget {
                 ],
               ),
             ),
-    );
+          ));
   }
 }
 

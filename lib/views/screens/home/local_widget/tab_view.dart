@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:comic_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../controllers/root_controller/root_controller.dart';
+import '../../../../controllers/comic_controller/comic_controller.dart';
 
 class TabView extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class TabView extends StatefulWidget {
 }
 
 class _TabViewState extends State<TabView> {
-  final RootController controller = Get.find();
+  final ComicController controller = Get.find();
 
   final PageController _pageController = PageController(initialPage: 0);
 
@@ -101,13 +101,13 @@ class SlideDots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 100),
       margin: const EdgeInsets.symmetric(horizontal: 4),
       height: isActive ? 8 : 6,
       width: isActive ? 8 : 6,
       decoration: BoxDecoration(
           color: isActive ? Colors.blue : Colors.grey,
-          borderRadius: BorderRadius.all(Radius.circular(15))),
+          borderRadius: const BorderRadius.all(Radius.circular(15))),
     );
   }
 }
