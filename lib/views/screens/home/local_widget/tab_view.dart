@@ -29,9 +29,10 @@ class _TabViewState extends State<TabView> {
       } else {
         _currentPage = 0;
       }
-      if (_pageController.hasClients)
+      if (_pageController.hasClients) {
         _pageController.animateToPage(_currentPage,
-            duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+            duration: const Duration(milliseconds: 700), curve: Curves.easeIn);
+      }
     });
     super.initState();
   }
@@ -44,52 +45,62 @@ class _TabViewState extends State<TabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        InkWell(
-          child: Container(
-            height: 200,
-            child: Stack(alignment: Alignment.bottomCenter, children: [
-              PageView.builder(
-                itemBuilder: (context, index) {
-                  return Container(
-                    child: InkWell(
-                      onTap: () {
-                        Get.toNamed(Routes.detail,
-                            arguments: controller.comicList.value[index].id);
-                      },
-                      child: Image.network(
-                        controller.comicList.value[index].imageURL.toString(),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  );
+    return SizedBox(
+      height: 200,
+      child: Stack(alignment: Alignment.bottomCenter, children: [
+        Card(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          elevation: 5,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          child: PageView.builder(
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  Get.toNamed(Routes.detail,
+                      arguments: controller.comicList.value[index].id);
                 },
-                itemCount: controller.comicList.length,
-                controller: _pageController,
-                onPageChanged: _onPageChange,
-              ),
-              Stack(
-                children: [
-                  Container(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        for (int i = 0; i < controller.comicList.length; i++)
-                          if (i == _currentPage)
-                            SlideDots(isActive: true)
-                          else
-                            SlideDots(isActive: false)
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ]),
+                child: Image.network(
+                  controller.comicList.value[index].hotImage.toString(),
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                  },
+                  filterQuality: FilterQuality.low,
+                  fit: BoxFit.cover,
+                ),
+              );
+            },
+            itemCount: controller.comicList.length,
+            controller: _pageController,
+            onPageChanged: _onPageChange,
           ),
         ),
-      ],
+        Positioned(
+          bottom: 10,
+          child: Stack(
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (int i = 0; i < controller.comicList.length; i++)
+                    if (i == _currentPage)
+                      SlideDots(isActive: true)
+                    else
+                      SlideDots(isActive: false)
+                ],
+              )
+            ],
+          ),
+        )
+      ]),
     );
   }
 }
@@ -106,7 +117,7 @@ class SlideDots extends StatelessWidget {
       height: isActive ? 8 : 6,
       width: isActive ? 8 : 6,
       decoration: BoxDecoration(
-          color: isActive ? Colors.blue : Colors.grey,
+          color: isActive ? Colors.white : Colors.white.withOpacity(0.5),
           borderRadius: const BorderRadius.all(Radius.circular(15))),
     );
   }

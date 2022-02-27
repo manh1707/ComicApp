@@ -10,6 +10,7 @@ class ComicListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ComicController controller = Get.find();
+
     double height = 300;
     return Stack(children: [
       Container(
@@ -18,7 +19,7 @@ class ComicListView extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10),
             scrollDirection: Axis.horizontal,
             itemCount: 5,
-            itemExtent: 180,
+            itemExtent: 200,
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return GestureDetector(
@@ -40,13 +41,13 @@ class ComicListView extends StatelessWidget {
             }),
       ),
       Positioned(
-        right: 0,
-        top: 100.0,
+        right: 8,
+        top: 110.0,
         child: Container(
           height: 25,
           width: 25,
           decoration: BoxDecoration(
-              color: Colors.lightBlue, borderRadius: BorderRadius.circular(20)),
+              color: Colors.blue, borderRadius: BorderRadius.circular(20)),
           child: const Icon(
             Icons.arrow_forward,
             color: Colors.white,

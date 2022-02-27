@@ -1,11 +1,11 @@
 import 'package:comic_app/services/api_service.dart';
 import 'package:get/get.dart';
-
 import '../../models/comic_model.dart';
 
 class ComicController extends GetxController {
   var isLoading = true.obs;
   var comicList = List<ComicModel>.empty(growable: true).obs;
+
   @override
   void onInit() async {
     await fetchAllComic();
@@ -16,7 +16,7 @@ class ComicController extends GetxController {
     return comicList.where((x) => x.name.contains(name)).toList();
   }
 
-  ComicModel findByID(String id) {
+  ComicModel findComicByID(String id) {
     return comicList.firstWhere((element) => element.id == id);
   }
 

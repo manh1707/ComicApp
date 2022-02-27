@@ -1,6 +1,7 @@
 import 'package:comic_app/themes.dart';
 import 'package:comic_app/views/screens/home/local_widget/comic_listview.dart';
 import 'package:comic_app/views/screens/home/local_widget/update_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'local_widget/tab_view.dart';
 
@@ -11,49 +12,64 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
+          title: Center(
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Icon(
+                      Icons.face_sharp,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: const [
+                        Icon(
+                          CupertinoIcons.search,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          width: 2,
+                        ),
+                        Text(
+                          'Tìm kiếm manga...',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
-          actions: [],
+          backgroundColor: Colors.white,
         ),
         body: SingleChildScrollView(
             child: Column(
           children: [
-            TabView(),
-            const SizedBox(
-              height: 10,
-            ),
             Padding(
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Container(
-                    //   height: 30,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: [
-                    //       Expanded(
-                    //         child: TextField(
-                    //           decoration: InputDecoration(
-                    //             fillColor: Colors.black,
-                    //             border: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(15),
-                    //             ),
-                    //             contentPadding:
-                    //                 const EdgeInsets.only(bottom: 10, left: 20),
-                    //             hintText: 'Tìm kiếm...',
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       const SizedBox(
-                    //         width: 20,
-                    //       ),
-                    //       const Icon(Icons.search)
-                    //     ],
-                    //   ),
-                    // ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Truyện Đặc Sắc',
+                      style: Mytheme.textLogin,
+                    ),
+                    TabView(),
                     const SizedBox(
                       height: 50,
                     ),
@@ -82,6 +98,9 @@ class HomeScreen extends StatelessWidget {
                       style: Mytheme.textLogin,
                     ),
                     const ComicListView(),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       'Có thể bạn sẽ thích ',
                       style: Mytheme.textLogin,

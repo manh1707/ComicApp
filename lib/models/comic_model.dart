@@ -9,6 +9,7 @@ class ComicModel {
   String author;
   List<ChapModel> chaps;
   DateTime upDateDay;
+  String hotImage;
   List<CommentModel> comments;
   bool isDone;
   ComicModel({
@@ -18,6 +19,7 @@ class ComicModel {
     required this.imageURL,
     required this.author,
     required this.comments,
+    required this.hotImage,
     required this.chaps,
     required this.upDateDay,
     required this.isDone,
@@ -36,6 +38,10 @@ class ComicModel {
     };
   }
 
+  ChapModel getChap(String id) {
+    return chaps.firstWhere((element) => element.id == id);
+  }
+
   int get CommentAmount {
     return comments.length;
   }
@@ -51,17 +57,21 @@ class ComicModel {
     return view;
   }
 
-  factory ComicModel.fromJson(Map<String, dynamic> map) {
+  factory ComicModel.fromJson(id, Map<String, dynamic> map) {
     return ComicModel(
-      id: map['id'],
+      id: id,
       name: map['name'],
       description: map['description'],
       imageURL: map['imageURL'],
+      hotImage: map['hotImage'],
       author: map['author'] ?? " ",
       chaps:
           List<ChapModel>.from(map['chap'].map((x) => ChapModel.fromJson(x))),
       upDateDay: map['updateDay'] ?? DateTime.now(),
-      comments: map['comment'] ?? [],
+      comments: (map['comment'] == null)
+          ? []
+          : List<CommentModel>.from(
+              map['comment'].map((x) => CommentModel.fromJson(x))),
       isDone: map['isDone'] ?? false,
     );
   }

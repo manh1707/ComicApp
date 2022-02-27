@@ -5,20 +5,20 @@ import 'package:get/get.dart';
 
 import '../../controllers/root_controller/root_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class Root extends StatelessWidget {
-  const Root({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     ComicController comicController = Get.find();
     RootController rootController = Get.find();
     return Obx(() => (comicController.isLoading == true)
-        ? LoadingIndicator()
+        ? const LoadingIndicator()
         : GetBuilder<RootController>(
             builder: (_) => Scaffold(
               body: rootController.currentScreen,
               bottomNavigationBar: BottomNavigationBar(
-                unselectedItemColor: Colors.black,
-                selectedItemColor: Colors.lightBlue,
+                unselectedItemColor: Colors.grey,
+                selectedItemColor: Colors.blue,
                 showUnselectedLabels: false,
                 currentIndex: rootController.getcurrtentTab,
                 type: BottomNavigationBarType.fixed,
@@ -26,10 +26,10 @@ class Root extends StatelessWidget {
                   rootController.setCurrentTab(index);
                 },
                 items: [
-                  _bottomNavigationItem(Icons.home, 'Home'),
-                  _bottomNavigationItem(Icons.history, 'History'),
-                  _bottomNavigationItem(Icons.notifications, 'Notification'),
-                  _bottomNavigationItem(Icons.person, 'Me')
+                  _bottomNavigationItem(Icons.home, 'Trang Chủ'),
+                  _bottomNavigationItem(Icons.history, 'Lịch sử đọc'),
+                  _bottomNavigationItem(Icons.favorite, 'Yêu thích'),
+                  _bottomNavigationItem(Icons.person, 'Tài khoản')
                 ],
               ),
             ),

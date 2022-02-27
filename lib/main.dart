@@ -1,6 +1,10 @@
+import 'package:comic_app/controllers/auth_controller/auth_controller.dart';
 import 'package:comic_app/views/screens/comic_details/comic_details_screen.dart';
+import 'package:comic_app/views/screens/login/login_screen.dart';
+import 'package:comic_app/views/screens/login/signup_screen.dart';
 import 'package:comic_app/views/screens/read_comic/read_comic.dart';
 import 'package:comic_app/views/screens/root.dart';
+import 'package:comic_app/views/screens/splash/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +14,10 @@ import 'controllers/root_controller/root_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
+  // FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.instance;
+  // firebaseAppCheck.activate();
+
   runApp(const MyApp());
 }
 
@@ -35,17 +42,22 @@ abstract class Routes {
   static const root = '/root';
   static const detail = '/detail';
   static const read = '/read';
+  static const login = '/login';
+  static const signup = '/signup';
 }
 
 final routePages = [
   GetPage(name: Routes.root, page: () => Root(), binding: RootBinding()),
   GetPage(name: Routes.detail, page: () => ComicDetailScreen()),
-  GetPage(name: Routes.read, page: () => ReadComicScreen())
+  GetPage(name: Routes.read, page: () => ReadComicScreen()),
+  GetPage(name: Routes.login, page: () => LoginScreen()),
+  GetPage(name: Routes.signup, page: () => RegisterScreen()),
 ];
 
 class RootBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut(() => AuthController());
     Get.lazyPut(() => RootController());
     Get.lazyPut(() => ComicController());
   }

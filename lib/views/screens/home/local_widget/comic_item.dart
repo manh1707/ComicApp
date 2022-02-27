@@ -1,7 +1,4 @@
-import 'package:comic_app/main.dart';
-import 'package:comic_app/views/screens/comic_details/comic_details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ComicItems extends StatelessWidget {
   String? imageUrl;
@@ -18,35 +15,38 @@ class ComicItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: withSize,
-      width: heightSize,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: heightSize * 0.8,
-            width: withSize * 0.8,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            child: Image.network(
-              imageUrl!,
-              fit: BoxFit.cover,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Card(
+            elevation: 5,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            child: SizedBox(
+              height: double.maxFinite,
+              width: withSize,
+              child: Image.network(
+                imageUrl!,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-          Text(
-            comicName!,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          Text(
-            description!,
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      ),
+        ),
+        Text(
+          comicName!,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        Text(
+          description!,
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 }

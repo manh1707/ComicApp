@@ -1,7 +1,7 @@
 import 'package:comic_app/models/comic_model.dart';
 import 'package:comic_app/views/screens/comic_details/local_widget/list_of_chap.dart';
 import 'package:comic_app/views/screens/comic_details/local_widget/detail_comic.dart';
-import 'package:comic_app/views/screens/comic_details/local_widget/header.dart';
+import 'package:comic_app/views/screens/comic_details/local_widget/header_of_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/comic_controller/comic_controller.dart';
@@ -17,7 +17,7 @@ class _ComicDetailScreenState extends State<ComicDetailScreen>
   Widget build(BuildContext context) {
     String id = Get.arguments;
     final ComicController controller = Get.find();
-    final ComicModel model = controller.findByID(id);
+    final ComicModel comic = controller.findComicByID(id);
     TabController tabController = TabController(length: 2, vsync: this);
     return Scaffold(
       body: NestedScrollView(
@@ -30,10 +30,8 @@ class _ComicDetailScreenState extends State<ComicDetailScreen>
                   maxHeight: 300,
                   minheight: 100,
                   isFavorite: true,
-                  comicName: model.name,
-                  imageUrl: model.imageURL,
-                  view: model.totalView.toString(),
-                  comment: '155',
+                  comicName: comic.name,
+                  imageUrl: comic.hotImage,
                   tabController: tabController),
             )
           ];
@@ -42,11 +40,12 @@ class _ComicDetailScreenState extends State<ComicDetailScreen>
           controller: tabController,
           children: [
             DetailComic(
-              decription: model.description.toString(),
-              comments: model.comments,
-            ),
+                decription: comic.description.toString(),
+                comments: comic.comments,
+                id: id,
+                comicModel: comic),
             ListOfChap(
-              listofChap: model.chaps,
+              comic: comic,
             ),
           ],
         ),

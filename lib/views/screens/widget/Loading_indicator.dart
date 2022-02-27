@@ -21,7 +21,7 @@ class LoadingIndicator extends StatelessWidget {
                 color: Colors.red,
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Text(
                 'Loading...',

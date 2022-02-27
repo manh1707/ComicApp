@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 class SliverDelegate extends SliverPersistentHeaderDelegate {
   SliverDelegate(
       {required this.maxHeight,
-      required this.view,
-      required this.comment,
       required this.minheight,
       required this.comicName,
       required this.tabController,
@@ -17,8 +15,7 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
   final double maxHeight;
   final double minheight;
   final String imageUrl;
-  final String view;
-  final String comment;
+
   final String comicName;
   late TabController tabController;
   bool isFavorite;
@@ -41,7 +38,7 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
                     sigmaY: imageOpacity(shrinkOffset)),
                 child: Image.network(
                   imageUrl,
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -60,34 +57,6 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
               left: 15,
             ),
             Positioned(
-              child: Row(
-                children: [
-                  Icon(
-                    CupertinoIcons.eye,
-                    color: Colors.deepOrange
-                        .withOpacity(titleOpacity(shrinkOffset)),
-                  ),
-                  Text(view,
-                      style: TextStyle(
-                          color: Colors.white
-                              .withOpacity(titleOpacity(shrinkOffset)))),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Icon(
-                    CupertinoIcons.bubble_left_bubble_right,
-                    color: Colors.pink.withOpacity(titleOpacity(shrinkOffset)),
-                  ),
-                  Text(comment,
-                      style: TextStyle(
-                          color: Colors.white
-                              .withOpacity(titleOpacity(shrinkOffset))))
-                ],
-              ),
-              bottom: 10,
-              right: 15,
-            ),
-            Positioned(
               child: GestureDetector(
                 onTap: () {
                   Get.back();
@@ -100,20 +69,20 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
               left: 15,
               top: 15,
             ),
-            Positioned(
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(
-                  (isFavorite == true)
-                      ? CupertinoIcons.heart_fill
-                      : CupertinoIcons.heart_slash_fill,
-                  // Icons.favorite_border_sharp,
-                  color: Colors.white,
-                ),
-              ),
-              right: 15,
-              top: 15,
-            ),
+            // Positioned(
+            //   child: GestureDetector(
+            //     onTap: () {},
+            //     child: Icon(
+            //       (isFavorite == true)
+            //           ? CupertinoIcons.heart_fill
+            //           : CupertinoIcons.heart_slash_fill,
+            //       // Icons.favorite_border_sharp,
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            //   right: 15,
+            //   top: 15,
+            // ),
           ]),
         ),
         Container(
@@ -129,7 +98,7 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
                 isScrollable: true,
                 indicatorSize: TabBarIndicatorSize.label,
                 indicatorColor: Colors.red,
-                tabs: [
+                tabs: const [
                   Tab(
                     text: "Chi tiết",
                   ),
