@@ -1,4 +1,8 @@
 import 'package:comic_app/controllers/auth_controller/auth_controller.dart';
+import 'package:comic_app/views/screens/login/local_widget/confirm_pass_field.dart';
+import 'package:comic_app/views/screens/login/local_widget/email_text_field.dart';
+import 'package:comic_app/views/screens/login/local_widget/name_field.dart';
+import 'package:comic_app/views/screens/login/local_widget/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,105 +20,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
-    final firstNamelField = TextFormField(
-      autofocus: false,
-      controller: userNameController,
-      keyboardType: TextInputType.name,
-      onSaved: (value) {
-        userNameController.text = value!;
-      },
-      validator: (value) {
-        RegExp regExp = RegExp(r'^.{3,}$');
-        if (value!.isEmpty) {
-          return "Tên không thể để trống";
-        }
-        if (!regExp.hasMatch(value)) {
-          return "Tên phải có ít nhất 3 kí tự";
-        }
-        return null;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        prefixIcon: const Icon(Icons.account_circle),
-        hintText: 'Tên của bạn là ',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
-
-    final emailField = TextFormField(
-      autofocus: false,
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (value) {
-        emailController.text = value!;
-      },
-      validator: (value) {
-        if (value!.isEmpty) {
-          return "Hãy nhập email của bạn";
-        }
-        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-          return ("Hãy nhập email hợp lệ");
-        }
-        return null;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        prefixIcon: const Icon(Icons.mail),
-        hintText: 'Email',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
-    final passField = TextFormField(
-      autofocus: false,
-      obscureText: true,
-      controller: passController,
-      validator: (value) {
-        RegExp regExp = RegExp(r'^.{6,}$');
-        if (value!.isEmpty) {
-          return "Hãy nhập mậu khẩu";
-        }
-        if (!regExp.hasMatch(value)) {
-          return "Hãy nhập mật khẩu hợp lệ";
-        }
-        return null;
-      },
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (value) {
-        passController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        prefixIcon: const Icon(Icons.vpn_key),
-        hintText: 'Mật Khẩu',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
-    final confirmpassField = TextFormField(
-      autofocus: false,
-      obscureText: true,
-      controller: confirmpassController,
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (value) {
-        confirmpassController.text = value!;
-      },
-      validator: (value) {
-        // ignore: unrelated_type_equality_checks
-        if (confirmpassController.text.length == passController.text) {
-          return 'Mật khẩu không trùng khớp';
-        }
-        return null;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        prefixIcon: const Icon(Icons.vpn_key),
-        hintText: 'Nhập lại mật khẩu',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
     final signUpButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
@@ -160,19 +65,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(
                   height: 50,
                 ),
-                firstNamelField,
+                NameField(userNameController: userNameController),
                 const SizedBox(
                   height: 25,
                 ),
-                emailField,
+                EmailTextField(emailController: emailController),
                 const SizedBox(
                   height: 25,
                 ),
-                passField,
+                PasswordField(passwordController: passController),
                 const SizedBox(
                   height: 25,
                 ),
-                confirmpassField,
+                ConfirmPassField(
+                    confirmpassController: confirmpassController,
+                    passController: passController),
                 const SizedBox(
                   height: 25,
                 ),

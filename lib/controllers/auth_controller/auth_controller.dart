@@ -67,7 +67,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> logIn(
+  Future<void> signIn(
       GlobalKey<FormState> formKey, String email, String password) async {
     if (formKey.currentState!.validate()) {
       await _auth

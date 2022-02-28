@@ -88,14 +88,12 @@ class AccountScreen extends StatelessWidget {
                             color: Colors.grey,
                           ),
                           'Nạp tiền '),
-                      const Divider(),
                       const FuntionButton(
                           Icon(
                             Icons.person_add,
                             color: Colors.grey,
                           ),
                           'Trở thành đối tác '),
-                      const Divider(),
                       TextButton.icon(
                           onPressed: () {},
                           icon: const Icon(
@@ -109,7 +107,34 @@ class AccountScreen extends StatelessWidget {
                           )),
                       TextButton.icon(
                           onPressed: () {
-                            controller.logout();
+                            Get.defaultDialog(
+                                title: 'Bạn có chắc muốn thoát không',
+                                content: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Get.back();
+                                          authController.logout();
+                                        },
+                                        child: Text(
+                                          'Yes',
+                                          style: Mytheme.textLogin.copyWith(
+                                              fontSize: 16, color: Colors.red),
+                                        )),
+                                    TextButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: Text(
+                                          'No',
+                                          style: Mytheme.textLogin.copyWith(
+                                              fontSize: 16,
+                                              color: Colors.black),
+                                        )),
+                                  ],
+                                ));
                           },
                           icon: const Icon(
                             Icons.logout,

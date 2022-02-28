@@ -1,4 +1,6 @@
 import 'package:comic_app/main.dart';
+import 'package:comic_app/views/screens/login/local_widget/email_text_field.dart';
+import 'package:comic_app/views/screens/login/local_widget/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,57 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
-    final emailField = TextFormField(
-      autofocus: false,
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return "Please enter your email";
-        }
-        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-          return ("Please Enter a valid email");
-        }
-        return null;
-      },
-      onSaved: (value) {
-        emailController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        prefixIcon: const Icon(Icons.mail),
-        hintText: 'Tài khoản',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
-    final passwordlField = TextFormField(
-      obscureText: true,
-      autofocus: false,
-      controller: passwordController,
-      validator: (value) {
-        RegExp regExp = RegExp(r'^.{6,}$');
-        if (value!.isEmpty) {
-          return "Please enter pasword";
-        }
-        if (!regExp.hasMatch(value)) {
-          return "Please enter invalid pasword";
-        }
-        return null;
-      },
-      onSaved: (value) {
-        passwordController.text = value!;
-      },
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        prefixIcon: const Icon(Icons.vpn_key),
-        hintText: 'Mật khẩu',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
-
-    final loginButton = Material(
+    final signInButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
       color: Colors.blue,
@@ -75,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           authController
-              .logIn(_formKey, emailController.text, passwordController.text)
+              .signIn(_formKey, emailController.text, passwordController.text)
               .then((value) {
             Future.delayed(const Duration(seconds: 1), () {
               Get.offAllNamed(Routes.root)!.then((value) {
@@ -105,20 +57,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 36,
                   ),
-                  emailField,
+                  EmailTextField(emailController: emailController),
                   const SizedBox(
                     height: 25,
                   ),
-                  passwordlField,
+                  PasswordField(passwordController: passwordController),
                   const SizedBox(
                     height: 36,
                   ),
-                  loginButton,
+                  signInButton,
                   const SizedBox(
                     height: 10,
                   ),
-                  // ignore: null_check_always_fails
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -138,7 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-            color: Colors.white,
           ),
         ),
       ),
