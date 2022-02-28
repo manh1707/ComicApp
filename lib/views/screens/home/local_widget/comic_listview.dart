@@ -1,5 +1,6 @@
 import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
 import 'package:comic_app/main.dart';
+import 'package:comic_app/models/comic_model.dart';
 import 'package:comic_app/views/screens/home/local_widget/comic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,10 +11,10 @@ class ComicListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ComicController controller = Get.find();
-
+    List<ComicModel> list = controller.comicList;
     double height = 300;
     return Stack(children: [
-      Container(
+      SizedBox(
         height: height,
         child: ListView.builder(
             padding: const EdgeInsets.only(right: 10),
@@ -24,18 +25,16 @@ class ComicListView extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  Get.toNamed(Routes.detail,
-                      arguments: controller.comicList.value[index].id);
+                  Get.toNamed(Routes.detail, arguments: list[index].id);
                 },
                 child: Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: ComicItems(
                       withSize: 0.8 * height,
                       heightSize: height,
-                      comicName: controller.comicList.value[index].name,
-                      description:
-                          controller.comicList.value[index].description,
-                      imageUrl: controller.comicList.value[index].imageURL,
+                      comicName: list[index].name,
+                      description: list[index].description,
+                      imageUrl: list[index].imageURL,
                     )),
               );
             }),

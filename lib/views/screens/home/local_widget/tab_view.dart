@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:comic_app/main.dart';
+import 'package:comic_app/models/comic_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/comic_controller/comic_controller.dart';
@@ -45,6 +46,7 @@ class _TabViewState extends State<TabView> {
 
   @override
   Widget build(BuildContext context) {
+    List<ComicModel> list = controller.comicList;
     return SizedBox(
       height: 200,
       child: Stack(alignment: Alignment.bottomCenter, children: [
@@ -56,11 +58,10 @@ class _TabViewState extends State<TabView> {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.detail,
-                      arguments: controller.comicList.value[index].id);
+                  Get.toNamed(Routes.detail, arguments: list[index].id);
                 },
                 child: Image.network(
-                  controller.comicList.value[index].hotImage.toString(),
+                  list[index].hotImage.toString(),
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
                     return Center(

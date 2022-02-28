@@ -34,8 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        prefixIcon: Icon(Icons.mail),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        prefixIcon: const Icon(Icons.mail),
         hintText: 'Tài khoản',
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
@@ -45,13 +45,14 @@ class _LoginScreenState extends State<LoginScreen> {
       autofocus: false,
       controller: passwordController,
       validator: (value) {
-        RegExp regExp = new RegExp(r'^.{6,}$');
+        RegExp regExp = RegExp(r'^.{6,}$');
         if (value!.isEmpty) {
           return "Please enter pasword";
         }
         if (!regExp.hasMatch(value)) {
           return "Please enter invalid pasword";
         }
+        return null;
       },
       onSaved: (value) {
         passwordController.text = value!;
@@ -77,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
               .logIn(_formKey, emailController.text, passwordController.text)
               .then((value) {
             Future.delayed(const Duration(seconds: 1), () {
-              Get.offAndToNamed(Routes.root)!.then((value) {
+              Get.offAllNamed(Routes.root)!.then((value) {
                 Get.snackbar('Thông báo', 'Đăng Nhập thành công');
               });
             });

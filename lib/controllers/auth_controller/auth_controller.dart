@@ -39,6 +39,16 @@ class AuthController extends GetxController {
     update();
   }
 
+  void addFavorite(String comicID) {
+    userModel.value.favoriteComic!.add(comicID);
+    update();
+  }
+
+  void removeFavorite(String comicID) {
+    userModel.value.favoriteComic!.remove(comicID);
+    update();
+  }
+
   Future<void> signUp(
     GlobalKey<FormState> formKey,
     String email,
@@ -81,7 +91,8 @@ class AuthController extends GetxController {
             "https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/263674497_1588136888200388_6965760474362487225_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=MARP4voYV5sAX_TQZgy&tn=Z2sltfH5ZjBRjBWV&_nc_ht=scontent.fhan3-5.fna&oh=00_AT8n-njiAA6LWjbUl3tl9-BGmzUICpK1Ru94yXwrVHHc7w&oe=621F4C0F");
     final Uri url = Uri.parse(ApiUrl().API_URL + "user/" + user.uid + ".json");
     var body = json.encode(userModel.toJson());
-    var responce = await http.put(url, body: body);
+
+    var responce = await http.patch(url, body: body);
     if (responce.statusCode == 200) {
       Get.snackbar('Thông báo', 'Đăng kí thành công');
       isAuth(true);

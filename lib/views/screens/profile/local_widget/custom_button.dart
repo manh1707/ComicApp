@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FuntionButton extends StatelessWidget {
-  FuntionButton(this.icon, this.text, {Key? key}) : super(key: key);
-  Icon icon;
-  String text;
+  const FuntionButton(this.icon, this.text, {Key? key}) : super(key: key);
+  final Icon icon;
+  final String text;
 
   @override
   Widget build(BuildContext context) {

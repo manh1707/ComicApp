@@ -7,8 +7,11 @@ import 'package:get/get.dart';
 
 import '../../../main.dart';
 
+// ignore: must_be_immutable
 class AccountScreen extends StatelessWidget {
   AuthController authController = Get.find();
+
+  AccountScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     UserModel user = authController.userModel.value;
@@ -31,6 +34,7 @@ class AccountScreen extends StatelessWidget {
       ),
     );
     return GetBuilder<AuthController>(
+        // ignore: unrelated_type_equality_checks
         builder: (controller) => (authController.isAuth == true)
             ? SingleChildScrollView(
                 child: Padding(
@@ -78,15 +82,15 @@ class AccountScreen extends StatelessWidget {
                       const SizedBox(
                         height: 50,
                       ),
-                      FuntionButton(
-                          const Icon(
+                      const FuntionButton(
+                          Icon(
                             Icons.money,
                             color: Colors.grey,
                           ),
                           'Nạp tiền '),
                       const Divider(),
-                      FuntionButton(
-                          const Icon(
+                      const FuntionButton(
+                          Icon(
                             Icons.person_add,
                             color: Colors.grey,
                           ),
@@ -122,7 +126,7 @@ class AccountScreen extends StatelessWidget {
               )
             : Center(
                 child: Container(
-                    padding: EdgeInsets.all(36),
+                    padding: const EdgeInsets.all(36),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

@@ -63,4 +63,16 @@ class ApiService {
       Get.snackbar('Error', "Co loi xay ra");
     }
   }
+
+  Future<void> addFavoriteComic(
+      List<String>? favoriteList, String userID) async {
+    final Uri url = Uri.parse(ApiUrl().favoriteList(userID));
+    var body = json.encode(List<dynamic>.from(favoriteList!.map((e) => e)));
+    var response = await http.put(url, body: body);
+    if (response.statusCode == 200) {
+      Get.snackbar('Thong bao', 'Thêm vào danh sách yêu thích thành công');
+    } else {
+      Get.snackbar('Error', "Co loi xay ra");
+    }
+  }
 }

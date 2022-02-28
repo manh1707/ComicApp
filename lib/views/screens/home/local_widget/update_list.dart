@@ -1,4 +1,5 @@
 import 'package:comic_app/main.dart';
+import 'package:comic_app/models/comic_model.dart';
 import 'package:comic_app/views/screens/home/local_widget/comic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ class Updatelist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ComicController controller = Get.find();
+    List<ComicModel> list = controller.comicList;
     return GridView.builder(
         itemCount: 4,
         shrinkWrap: true,
@@ -24,15 +26,14 @@ class Updatelist extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              Get.toNamed(Routes.detail,
-                  arguments: controller.comicList.value[index].id);
+              Get.toNamed(Routes.detail, arguments: list[index].id);
             },
             child: ComicItems(
               withSize: 250,
               heightSize: 300,
-              comicName: controller.comicList.value[index].name,
-              description: controller.comicList.value[index].description,
-              imageUrl: controller.comicList.value[index].imageURL,
+              comicName: list[index].name,
+              description: list[index].description,
+              imageUrl: list[index].imageURL,
             ),
           );
         });

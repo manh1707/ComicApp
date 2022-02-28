@@ -42,7 +42,7 @@ class ComicModel {
     return chaps.firstWhere((element) => element.id == id);
   }
 
-  int get CommentAmount {
+  int get commentAmount {
     return comments.length;
   }
 

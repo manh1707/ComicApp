@@ -27,7 +27,7 @@ class DetailComic extends StatelessWidget {
     AuthController controller = Get.find();
     final String comicID = id;
     final String? userID = controller.userModel.value.id;
-    bool isFavorite = controller.userModel.value.isFavorite(id);
+
     TextEditingController commentEditing = TextEditingController();
     return SingleChildScrollView(
       child: Padding(
@@ -48,35 +48,50 @@ class DetailComic extends StatelessWidget {
                       color: Colors.grey,
                       fontWeight: FontWeight.w700),
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: isFavorite == false
-                      ? Row(
-                          children: [
-                            Text('Follow',
-                                style: Mytheme.textLogin.copyWith(
+                GetBuilder<AuthController>(
+                  builder: (controller) {
+                    bool isFavorite = controller.userModel.value.isFavorite(id);
+
+                    return InkWell(
+                      onTap: () {
+                        if (isFavorite == true) {
+                          controller.removeFavorite(comicID);
+                        } else {
+                          controller.addFavorite(comicID);
+                        }
+
+                        ApiService().addFavoriteComic(
+                            controller.userModel.value.favoriteComic, userID!);
+                      },
+                      child: isFavorite == false
+                          ? Row(
+                              children: [
+                                Text('Follow',
+                                    style: Mytheme.textLogin.copyWith(
+                                      color: Colors.grey,
+                                      fontSize: 16,
+                                    )),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Icon(
+                                  Icons.add,
                                   color: Colors.grey,
-                                  fontSize: 16,
-                                )),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Icon(
-                              Icons.add,
-                              color: Colors.grey,
-                              size: 14,
+                                  size: 14,
+                                )
+                              ],
                             )
-                          ],
-                        )
-                      : Row(
-                          children: [
-                            Text('Following',
-                                style: Mytheme.textLogin.copyWith(
-                                  color: Colors.red,
-                                  fontSize: 16,
-                                )),
-                          ],
-                        ),
+                          : Row(
+                              children: [
+                                Text('Following',
+                                    style: Mytheme.textLogin.copyWith(
+                                      color: Colors.red,
+                                      fontSize: 16,
+                                    )),
+                              ],
+                            ),
+                    );
+                  },
                 )
               ],
             ),

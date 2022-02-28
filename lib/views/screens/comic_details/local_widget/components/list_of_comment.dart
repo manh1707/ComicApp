@@ -12,7 +12,7 @@ class ListOfComment extends StatelessWidget {
     AuthController authController = Get.find();
     return ListView.separated(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           UserModel userModel =
               authController.getUserbyID(commentList[index].userID.toString());

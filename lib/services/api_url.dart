@@ -14,4 +14,8 @@ class ApiUrl {
   String comicCommentURl(String idComic) {
     return "https://comic-app-d5041-default-rtdb.asia-southeast1.firebasedatabase.app/comic/$idComic/comment.json";
   }
+
+  String favoriteList(String userID) {
+    return "https://comic-app-d5041-default-rtdb.asia-southeast1.firebasedatabase.app/user/$userID/favoriteComic.json";
+  }
 }
