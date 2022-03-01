@@ -22,7 +22,7 @@ class UserModel {
       'userName': userName,
       'avatarURL': avatarURl,
       'email': email,
-      'favoriteComic': favoriteComic
+      'favoriteComic': []
     };
   }
 

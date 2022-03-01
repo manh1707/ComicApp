@@ -48,51 +48,82 @@ class DetailComic extends StatelessWidget {
                       color: Colors.grey,
                       fontWeight: FontWeight.w700),
                 ),
-                GetBuilder<AuthController>(
-                  builder: (controller) {
-                    bool isFavorite = controller.userModel.value.isFavorite(id);
-
-                    return InkWell(
-                      onTap: () {
-                        if (isFavorite == true) {
-                          controller.removeFavorite(comicID);
-                        } else {
-                          controller.addFavorite(comicID);
-                        }
-
-                        ApiService().addFavoriteComic(
-                            controller.userModel.value.favoriteComic, userID!);
-                      },
-                      child: isFavorite == false
-                          ? Row(
-                              children: [
-                                Text('Follow',
-                                    style: Mytheme.textLogin.copyWith(
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                    )),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                const Icon(
-                                  Icons.add,
+                (controller.isAuth.isFalse)
+                    ? InkWell(
+                        onTap: () {
+                          Get.snackbar(
+                              "Thông báo ", 'Vui lòng đăng nhập để theo dõi',
+                              backgroundColor: Colors.white,
+                              colorText: Colors.red);
+                        },
+                        child: Row(
+                          children: [
+                            Text('Follow',
+                                style: Mytheme.textLogin.copyWith(
                                   color: Colors.grey,
-                                  size: 14,
-                                )
-                              ],
-                            )
-                          : Row(
-                              children: [
-                                Text('Following',
-                                    style: Mytheme.textLogin.copyWith(
-                                      color: Colors.red,
-                                      fontSize: 16,
-                                    )),
-                              ],
+                                  fontSize: 16,
+                                )),
+                            const SizedBox(
+                              width: 5,
                             ),
-                    );
-                  },
-                )
+                            const Icon(
+                              Icons.add,
+                              color: Colors.grey,
+                              size: 14,
+                            )
+                          ],
+                        ),
+                      )
+                    : GetBuilder<AuthController>(
+                        builder: (controller) {
+                          bool isFavorite =
+                              controller.userModel.value.isFavorite(id);
+                          return InkWell(
+                            onTap: () {
+                              if (isFavorite == true) {
+                                controller.removeFavorite(comicID);
+                                ApiService().addFavoriteComic(
+                                    controller.userModel.value.favoriteComic,
+                                    userID!,
+                                    'Bỏ theo dõi truyện');
+                              } else {
+                                controller.addFavorite(comicID);
+                                ApiService().addFavoriteComic(
+                                    controller.userModel.value.favoriteComic,
+                                    userID!,
+                                    'Đã thêm truyện vào danh sách yêu thích');
+                              }
+                            },
+                            child: isFavorite == false
+                                ? Row(
+                                    children: [
+                                      Text('Follow',
+                                          style: Mytheme.textLogin.copyWith(
+                                            color: Colors.grey,
+                                            fontSize: 16,
+                                          )),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      const Icon(
+                                        Icons.add,
+                                        color: Colors.grey,
+                                        size: 14,
+                                      )
+                                    ],
+                                  )
+                                : Row(
+                                    children: [
+                                      Text('Following',
+                                          style: Mytheme.textLogin.copyWith(
+                                            color: Colors.red,
+                                            fontSize: 16,
+                                          )),
+                                    ],
+                                  ),
+                          );
+                        },
+                      )
               ],
             ),
             const SizedBox(
@@ -143,36 +174,34 @@ class DetailComic extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: commentEditing,
-                    onSubmitted: (comment) {
-                      CommentModel commentModel = CommentModel(
-                          id: DateTime.now().toIso8601String(),
-                          content: commentEditing.text,
-                          userID: userID,
-                          updateDay: DateFormat("dd-MM-yyyy")
-                              .format(DateTime.now())
-                              .toString());
-                      comicModel.comments.add(commentModel);
-                      ApiService().postCommnent(comicModel.comments, comicID);
-                      commentEditing.clear();
-                    },
-                    decoration: InputDecoration(
-                      fillColor: Colors.black,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      contentPadding:
-                          const EdgeInsets.only(bottom: 5, left: 15),
-                      hintText: 'Viết bình luận ....',
-                      suffixIcon: const Icon(Icons.send),
-                    ),
-                  ),
+            TextField(
+              controller: commentEditing,
+              onSubmitted: (comment) {
+                if (controller.isAuth.isFalse) {
+                  Get.snackbar("Thông báo ", 'Vui lòng đăng nhập để theo dõi',
+                      backgroundColor: Colors.white, colorText: Colors.red);
+                } else {
+                  CommentModel commentModel = CommentModel(
+                      id: DateTime.now().toIso8601String(),
+                      content: commentEditing.text,
+                      userID: userID,
+                      updateDay: DateFormat("dd-MM-yyyy")
+                          .format(DateTime.now())
+                          .toString());
+                  comicModel.comments.add(commentModel);
+                  ApiService().postCommnent(comicModel.comments, comicID);
+                  commentEditing.clear();
+                }
+              },
+              decoration: InputDecoration(
+                fillColor: Colors.black,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-              ],
+                contentPadding: const EdgeInsets.only(bottom: 5, left: 15),
+                hintText: 'Viết bình luận ....',
+                suffixIcon: const Icon(Icons.send),
+              ),
             ),
           ],
         ),

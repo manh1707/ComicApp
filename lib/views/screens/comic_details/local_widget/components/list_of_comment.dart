@@ -25,45 +25,56 @@ class ListOfComment extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        userModel.userName.toString(),
-                        style: const TextStyle(
-                            color: Colors.black87, fontWeight: FontWeight.w700),
-                      ),
-                      Container(
-                        height: 15,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: const Text(
-                          'VIP',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          userModel.userName.toString(),
+                          style: const TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w700),
                         ),
-                      )
-                    ],
-                  ),
-                  Text(
-                    commentList[index].content.toString(),
-                    style: const TextStyle(
-                      color: Colors.black87,
+                        const SizedBox(
+                          width: 2,
+                        ),
+                        Container(
+                          height: 15,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: const Text(
+                            'VIP',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          commentList[index].updateDay.toString(),
+                          style: const TextStyle(
+                            color: Colors.black26,
+                          ),
+                        ),
+                      ],
                     ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    commentList[index].updateDay.toString(),
-                    style: const TextStyle(
-                      color: Colors.black26,
+                    Text(
+                      commentList[index].content.toString(),
+                      style: const TextStyle(
+                        color: Colors.black87,
+                      ),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           );

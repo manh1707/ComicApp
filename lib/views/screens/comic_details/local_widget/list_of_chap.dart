@@ -1,5 +1,6 @@
+import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
+import 'package:comic_app/main.dart';
 import 'package:comic_app/models/comic_model.dart';
-import 'package:comic_app/views/screens/read_comic/read_comic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,7 @@ class ListOfChap extends StatelessWidget {
   Widget build(BuildContext context) {
     final listOfChap = comic.chaps;
     bool isNew = false;
+    ComicController comicController = Get.find();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
@@ -57,8 +59,8 @@ class ListOfChap extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                     onTap: () {
-                      Get.to(() => ReadComicScreen(),
-                          arguments: [listOfChap, index]);
+                      comicController.addToHistory(comic, index);
+                      Get.toNamed(Routes.read, arguments: [comic, index]);
                     },
                     child: SizedBox(
                       height: 50,

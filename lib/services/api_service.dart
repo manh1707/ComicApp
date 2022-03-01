@@ -65,12 +65,12 @@ class ApiService {
   }
 
   Future<void> addFavoriteComic(
-      List<String>? favoriteList, String userID) async {
+      List<String>? favoriteList, String userID, String content) async {
     final Uri url = Uri.parse(ApiUrl().favoriteList(userID));
     var body = json.encode(List<dynamic>.from(favoriteList!.map((e) => e)));
     var response = await http.put(url, body: body);
     if (response.statusCode == 200) {
-      Get.snackbar('Thong bao', 'Thêm vào danh sách yêu thích thành công');
+      Get.snackbar('Thông báo', content);
     } else {
       Get.snackbar('Error', "Co loi xay ra");
     }

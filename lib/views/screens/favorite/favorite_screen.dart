@@ -12,71 +12,88 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ComicController comicController = Get.find();
-
+    AuthController authController = Get.find();
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15),
-          child: GetBuilder<AuthController>(builder: (controller) {
-            List<ComicModel> favoriteList = [];
-            for (var element in controller.userModel.value.favoriteComic!) {
-              favoriteList.add(comicController.findComicByID(element));
-            }
+      body: (authController.isAuth.isFalse)
+          ? Center(
+              child: Text(
+                'Bạn chưa đang nhập!!!',
+                textAlign: TextAlign.center,
+                style: Mytheme.textLogin.copyWith(color: Colors.red),
+              ),
+            )
+          : GetBuilder<AuthController>(builder: (controller) {
+              List<ComicModel> favoriteList = [];
+              for (var element in controller.userModel.value.favoriteComic!) {
+                favoriteList.add(comicController.findComicByID(element));
+              }
 
-            return ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: favoriteList.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return const Divider();
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () {
-                    Get.toNamed(Routes.detail,
-                        arguments: favoriteList[index].id);
-                  },
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        child: SizedBox(
-                            height: 250,
-                            width: 180,
-                            child: Image.network(
-                              favoriteList[index].imageURL,
-                              fit: BoxFit.cover,
-                            )),
+              return (favoriteList.isEmpty)
+                  ? Center(
+                      child: Text(
+                        'Chưa có truyện theo dõi!!!',
+                        style: Mytheme.textLogin.copyWith(color: Colors.red),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            favoriteList[index].name,
-                            style: Mytheme.textLogin
-                                .copyWith(color: Colors.black, fontSize: 20),
-                          ),
-                          Text(
-                            'Chap mới nhất ${favoriteList[index].chaps.length + 1}',
-                            style:
-                                Mytheme.textLogin.copyWith(color: Colors.grey),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              },
-            );
-          }),
-        ),
-      ),
+                    )
+                  : SingleChildScrollView(
+                      child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: favoriteList.length,
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const Divider();
+                            },
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(
+                                onTap: () {
+                                  Get.toNamed(Routes.detail,
+                                      arguments: favoriteList[index].id);
+                                },
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Card(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      child: SizedBox(
+                                          height: 250,
+                                          width: 180,
+                                          child: Image.network(
+                                            favoriteList[index].imageURL,
+                                            fit: BoxFit.cover,
+                                          )),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          favoriteList[index].name,
+                                          style: Mytheme.textLogin.copyWith(
+                                              color: Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                        Text(
+                                          'Chap mới nhất ${favoriteList[index].chaps.length + 1}',
+                                          style: Mytheme.textLogin
+                                              .copyWith(color: Colors.grey),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          )));
+            }),
     );
   }
 }

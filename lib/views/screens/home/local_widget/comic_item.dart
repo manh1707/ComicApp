@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ComicItems extends StatelessWidget {
-  String? imageUrl;
-  String? comicName;
-  String? description;
+  String imageUrl;
+  String comicName;
+  String description;
   double heightSize;
   double withSize;
   ComicItems(
@@ -29,20 +29,20 @@ class ComicItems extends StatelessWidget {
               height: double.maxFinite,
               width: withSize,
               child: Image.network(
-                imageUrl!,
+                imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
           ),
         ),
         Text(
-          comicName!,
+          comicName,
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
         Text(
-          description!,
+          description,
           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           overflow: TextOverflow.ellipsis,
         ),

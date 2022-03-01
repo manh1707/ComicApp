@@ -67,20 +67,6 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
               left: 15,
               top: 15,
             ),
-            // Positioned(
-            //   child: GestureDetector(
-            //     onTap: () {},
-            //     child: Icon(
-            //       (isFavorite == true)
-            //           ? CupertinoIcons.heart_fill
-            //           : CupertinoIcons.heart_slash_fill,
-            //       // Icons.favorite_border_sharp,
-            //       color: Colors.white,
-            //     ),
-            //   ),
-            //   right: 15,
-            //   top: 15,
-            // ),
           ]),
         ),
         Container(
