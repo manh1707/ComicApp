@@ -38,13 +38,12 @@ class ComicController extends GetxController {
       History().saveHistory(comicModel.id, chapindex);
       chapHistory.add(chapindex);
       historyComic.add(comicModel);
-      update();
     } else {
       History().saveHistory(comicModel.id, chapindex);
       chapHistory.add(chapindex);
       historyComic.add(comicModel);
-      update();
     }
+    update();
   }
 
   List<ComicModel> findByName(String name) {

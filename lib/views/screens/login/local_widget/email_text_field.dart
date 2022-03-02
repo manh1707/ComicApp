@@ -25,7 +25,7 @@ class EmailTextField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         prefixIcon: const Icon(Icons.mail),
-        hintText: 'Tài khoản',
+        hintText: 'Email của bạn',
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );

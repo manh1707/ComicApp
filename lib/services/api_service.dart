@@ -40,11 +40,12 @@ class ApiService {
     final response = await http.get(ApiUrl().USER_URL_list);
 
     if (response.statusCode == 200) {
-      final extraData = json.decode(response.body) as Map<String, dynamic>;
-
-      extraData.forEach((id, data) {
-        list.add(UserModel.fromJson(id, data));
-      });
+      final extraData = json.decode(response.body);
+      if (extraData != null) {
+        extraData.forEach((id, data) {
+          list.add(UserModel.fromJson(id, data));
+        });
+      }
     } else {
       Get.snackbar('Error', 'Có lỗi xảy ra');
     }

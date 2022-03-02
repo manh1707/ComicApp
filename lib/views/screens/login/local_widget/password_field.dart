@@ -23,7 +23,7 @@ class PasswordField extends StatelessWidget {
       onSaved: (value) {
         passwordController.text = value!;
       },
-      textInputAction: TextInputAction.done,
+      textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         prefixIcon: const Icon(Icons.vpn_key),

@@ -60,7 +60,7 @@ class AuthController extends GetxController {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
         postDetailToFirestore(username);
-        isAuth(true);
+        checkLogin();
       }).catchError((onError) {
         Get.snackbar("Error", onError.toString());
       });
@@ -83,19 +83,18 @@ class AuthController extends GetxController {
 
   Future<void> postDetailToFirestore(String userName) async {
     User? user = _auth.currentUser;
-    UserModel userModel = UserModel(
+    userModel.value = UserModel(
         id: user!.uid,
         userName: userName,
         email: user.email.toString(),
         avatarURl:
-            "https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/263674497_1588136888200388_6965760474362487225_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=MARP4voYV5sAX_TQZgy&tn=Z2sltfH5ZjBRjBWV&_nc_ht=scontent.fhan3-5.fna&oh=00_AT8n-njiAA6LWjbUl3tl9-BGmzUICpK1Ru94yXwrVHHc7w&oe=621F4C0F");
+            "https://firebasestorage.googleapis.com/v0/b/comic-app-d5041.appspot.com/o/UserImage%2Favatar.png?alt=media&token=19a44c95-c3e6-412c-82be-41b074ef40bd");
     final Uri url = Uri.parse(ApiUrl().API_URL + "user/" + user.uid + ".json");
     var body = json.encode(userModel.toJson());
-
     var responce = await http.patch(url, body: body);
     if (responce.statusCode == 200) {
       Get.snackbar('Thông báo', 'Đăng kí thành công');
-      isAuth(true);
+
       Future.delayed(const Duration(seconds: 1), () {
         Get.offAndToNamed(Routes.root);
       });
@@ -103,6 +102,7 @@ class AuthController extends GetxController {
       Get.snackbar('Thông báo', 'Đăng kí thất bại');
       return;
     }
+    update();
   }
 
   Future<void> logout() async {

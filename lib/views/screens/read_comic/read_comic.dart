@@ -1,3 +1,4 @@
+import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
 import 'package:comic_app/models/chap_model.dart';
 import 'package:comic_app/models/comic_model.dart';
 import 'package:comic_app/services/share.dart';
@@ -12,6 +13,7 @@ class ReadComicScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ComicController comicController = Get.find();
     ComicModel comicModel = Get.arguments[0] as ComicModel;
     int thisChap = Get.arguments[1];
     List<ChapModel> listOfChap = comicModel.chaps;
@@ -79,7 +81,8 @@ class ReadComicScreen extends StatelessWidget {
                   : ElevatedButton(
                       child: const Icon(Icons.arrow_back),
                       onPressed: () {
-                        History().saveHistory(comicModel.id, (thisChap - 1));
+                        comicController.addToHistory(
+                            comicModel, (thisChap - 1));
                         Get.offAndToNamed(Routes.read,
                             arguments: [comicModel, (thisChap - 1)]);
                       },
@@ -92,8 +95,8 @@ class ReadComicScreen extends StatelessWidget {
                   return DropdownMenuItem(value: item, child: Text(item));
                 }).toList(),
                 onChanged: (value) {
-                  History()
-                      .saveHistory(comicModel.id, chapTitle.indexOf(value!));
+                  comicController.addToHistory(
+                      comicModel, chapTitle.indexOf(value!));
                   Get.offAndToNamed(Routes.read,
                       arguments: [comicModel, chapTitle.indexOf(value)]);
                 },
@@ -108,7 +111,7 @@ class ReadComicScreen extends StatelessWidget {
                     Get.snackbar('Thông báo ', 'Không còn chương mới',
                         colorText: Colors.red);
                   } else {
-                    History().saveHistory(comicModel.id, (thisChap + 1));
+                    comicController.addToHistory(comicModel, (thisChap + 1));
                     Get.offAndToNamed(Routes.read,
                         arguments: [comicModel, (thisChap + 1)]);
                   }

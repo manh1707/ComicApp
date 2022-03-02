@@ -14,7 +14,7 @@ class ConfirmPassField extends StatelessWidget {
       autofocus: false,
       obscureText: true,
       controller: confirmpassController,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.visiblePassword,
       onSaved: (value) {
         confirmpassController.text = value!;
       },
@@ -25,7 +25,7 @@ class ConfirmPassField extends StatelessWidget {
         }
         return null;
       },
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         prefixIcon: const Icon(Icons.vpn_key),
