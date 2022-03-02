@@ -1,7 +1,7 @@
 import 'package:comic_app/controllers/auth_controller/auth_controller.dart';
+import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
 import 'package:comic_app/models/comic_model.dart';
 import 'package:comic_app/models/comment_model.dart';
-import 'package:comic_app/services/api_service.dart';
 import 'package:comic_app/themes.dart';
 import 'package:comic_app/views/screens/comic_details/local_widget/components/list_of_comment.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,9 +24,10 @@ class DetailComic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthController controller = Get.find();
+    AuthController authcontroller = Get.find();
+    ComicController comicController = Get.find();
     final String comicID = id;
-    final String? userID = controller.userModel.value.id;
+    final String? userID = authcontroller.currentUser.value.id;
 
     TextEditingController commentEditing = TextEditingController();
     return SingleChildScrollView(
@@ -48,7 +49,7 @@ class DetailComic extends StatelessWidget {
                       color: Colors.grey,
                       fontWeight: FontWeight.w700),
                 ),
-                (controller.isAuth.isFalse)
+                (authcontroller.isAuth.isFalse)
                     ? InkWell(
                         onTap: () {
                           Get.snackbar(
@@ -77,21 +78,19 @@ class DetailComic extends StatelessWidget {
                     : GetBuilder<AuthController>(
                         builder: (controller) {
                           bool isFavorite =
-                              controller.userModel.value.isFavorite(id);
+                              controller.currentUser.value.isFavorite(id);
                           return InkWell(
                             onTap: () {
                               if (isFavorite == true) {
-                                controller.removeFavorite(comicID);
-                                ApiService().addFavoriteComic(
-                                    controller.userModel.value.favoriteComic,
-                                    userID!,
-                                    'Bỏ theo dõi truyện');
+                                controller.removeFavorite(
+                                    comicID,
+                                    controller.currentUser.value.favoriteComic,
+                                    userID!);
                               } else {
-                                controller.addFavorite(comicID);
-                                ApiService().addFavoriteComic(
-                                    controller.userModel.value.favoriteComic,
-                                    userID!,
-                                    'Đã thêm truyện vào danh sách yêu thích');
+                                controller.addFavorite(
+                                    comicID,
+                                    controller.currentUser.value.favoriteComic,
+                                    userID!);
                               }
                             },
                             child: isFavorite == false
@@ -170,15 +169,18 @@ class DetailComic extends StatelessWidget {
                         color: Colors.black,
                         fontWeight: FontWeight.w700),
                   ))
-                : ListOfComment(commentList: comicModel.comments),
+                : GetBuilder<ComicController>(
+                    builder: (controller) => ListOfComment(
+                        commentList:
+                            comicController.findComicByID(comicID).comments)),
             const SizedBox(
               height: 10,
             ),
             TextField(
               controller: commentEditing,
               onSubmitted: (comment) {
-                if (controller.isAuth.isFalse) {
-                  Get.snackbar("Thông báo ", 'Vui lòng đăng nhập để theo dõi',
+                if (authcontroller.isAuth.isFalse) {
+                  Get.snackbar("Thông báo ", 'Vui lòng đăng nhập để bình luận',
                       backgroundColor: Colors.white, colorText: Colors.red);
                 } else {
                   CommentModel commentModel = CommentModel(
@@ -188,8 +190,7 @@ class DetailComic extends StatelessWidget {
                       updateDay: DateFormat("dd-MM-yyyy")
                           .format(DateTime.now())
                           .toString());
-                  comicModel.comments.add(commentModel);
-                  ApiService().postCommnent(comicModel.comments, comicID);
+                  comicController.addComment(comicModel, commentModel);
                   commentEditing.clear();
                 }
               },

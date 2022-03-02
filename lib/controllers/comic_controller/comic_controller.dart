@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:ffi';
+
+import 'package:comic_app/models/comment_model.dart';
 import 'package:comic_app/services/api_service.dart';
 import 'package:comic_app/services/share.dart';
 import 'package:get/get.dart';
@@ -9,6 +13,7 @@ class ComicController extends GetxController {
   var comicList = List<ComicModel>.empty(growable: true).obs;
   var historyComic = List<ComicModel>.empty(growable: true).obs;
   var chapHistory = List<int>.empty(growable: true).obs;
+  var chapSearch = List<ComicModel>.empty(growable: true).obs;
   @override
   void onInit() async {
     await fetchAllComic();
@@ -26,6 +31,18 @@ class ComicController extends GetxController {
         update();
       }
     });
+  }
+
+  Future<void> addComment(
+      ComicModel comicModel, CommentModel commentModel) async {
+    var response =
+        await ApiService().postCommnent(comicModel.comments, comicModel.id);
+    if (response.statusCode == 200) {
+      comicModel.comments.add(commentModel);
+      update();
+    } else {
+      Get.snackbar('Error', 'Có lỗi xảy ra');
+    }
   }
 
   Future<void> addToHistory(ComicModel comicModel, chapindex) async {
@@ -46,8 +63,10 @@ class ComicController extends GetxController {
     update();
   }
 
-  List<ComicModel> findByName(String name) {
-    return comicList.where((x) => x.name.contains(name)).toList();
+  void findByName(String name) {
+    chapSearch.value =
+        comicList.where((x) => x.name.toLowerCase().contains(name)).toList();
+    update();
   }
 
   ComicModel findComicByID(String id) {
@@ -57,9 +76,16 @@ class ComicController extends GetxController {
   Future<void> fetchAllComic() async {
     try {
       isLoading(true);
-      List<ComicModel> lists = await ApiService().fetchComic();
-      comicList.assignAll(lists);
-      update();
+      var response = await ApiService().fetchComic();
+      if (response.statusCode == 200) {
+        final extraData = json.decode(response.body) as Map<String, dynamic>;
+        extraData.forEach((id, data) {
+          comicList.add(ComicModel.fromJson(id, data));
+          update();
+        });
+      } else {
+        Get.snackbar('Error', 'Lỗi kêt nói tới sever');
+      }
     } finally {
       isLoading(false);
     }

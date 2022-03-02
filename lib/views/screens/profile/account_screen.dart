@@ -14,7 +14,7 @@ class AccountScreen extends StatelessWidget {
   AccountScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    UserModel user = authController.userModel.value;
+    UserModel user = authController.currentUser.value;
     final signIpButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),

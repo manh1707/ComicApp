@@ -1,8 +1,10 @@
+import 'package:comic_app/main.dart';
 import 'package:comic_app/themes.dart';
 import 'package:comic_app/views/screens/home/local_widget/comic_listview.dart';
 import 'package:comic_app/views/screens/home/local_widget/update_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'local_widget/tab_view.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -28,7 +30,9 @@ class HomeScreen extends StatelessWidget {
                     width: 15,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.search);
+                    },
                     child: Row(
                       children: const [
                         Icon(

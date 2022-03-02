@@ -4,6 +4,7 @@ import 'package:comic_app/views/screens/login/login_screen.dart';
 import 'package:comic_app/views/screens/login/signup_screen.dart';
 import 'package:comic_app/views/screens/read_comic/read_comic.dart';
 import 'package:comic_app/views/screens/root.dart';
+import 'package:comic_app/views/screens/search/search_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,6 +44,7 @@ abstract class Routes {
   static const read = '/read';
   static const login = '/login';
   static const signup = '/signup';
+  static const search = '/search';
 }
 
 final routePages = [
@@ -51,6 +53,7 @@ final routePages = [
   GetPage(name: Routes.read, page: () => ReadComicScreen()),
   GetPage(name: Routes.login, page: () => LoginScreen()),
   GetPage(name: Routes.signup, page: () => RegisterScreen()),
+  GetPage(name: Routes.search, page: () => SearchScreen()),
 ];
 
 class RootBinding extends Bindings {

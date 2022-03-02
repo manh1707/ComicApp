@@ -26,15 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          authController
-              .signIn(_formKey, emailController.text, passwordController.text)
-              .then((value) {
-            Future.delayed(const Duration(seconds: 1), () {
-              Get.offAllNamed(Routes.root)!.then((value) {
-                Get.snackbar('Thông báo', 'Đăng Nhập thành công');
-              });
-            });
-          });
+          authController.signIn(
+              _formKey, emailController.text, passwordController.text);
         },
         child: const Text(
           'Đăng nhập',

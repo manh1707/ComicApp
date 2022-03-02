@@ -18,14 +18,14 @@ class FavoriteScreen extends StatelessWidget {
         if (authController.isAuth.isFalse) {
           return Center(
             child: Text(
-              'Bạn chưa đang nhập!!!',
+              'Bạn chưa đăng nhập!!!',
               textAlign: TextAlign.center,
               style: Mytheme.textLogin.copyWith(color: Colors.red),
             ),
           );
         } else {
           List<ComicModel> favoriteList = [];
-          for (var element in controller.userModel.value.favoriteComic!) {
+          for (var element in controller.currentUser.value.favoriteComic!) {
             favoriteList.add(comicController.findComicByID(element));
           }
 
