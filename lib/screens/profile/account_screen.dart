@@ -1,11 +1,11 @@
 import 'package:comic_app/controllers/auth_controller/auth_controller.dart';
 import 'package:comic_app/models/user.dart';
 import 'package:comic_app/themes.dart';
-import 'package:comic_app/views/screens/profile/local_widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../main.dart';
+import 'local_widget/custom_button.dart';
 
 // ignore: must_be_immutable
 class AccountScreen extends StatelessWidget {

@@ -1,9 +1,10 @@
 import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
 import 'package:comic_app/main.dart';
 import 'package:comic_app/models/comic_model.dart';
-import 'package:comic_app/views/screens/home/local_widget/comic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'comic_item.dart';
 
 class ComicListView extends StatelessWidget {
   const ComicListView({Key? key}) : super(key: key);

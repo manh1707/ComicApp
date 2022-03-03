@@ -1,10 +1,10 @@
 import 'package:comic_app/models/comic_model.dart';
-import 'package:comic_app/views/screens/comic_details/local_widget/list_of_chap.dart';
-import 'package:comic_app/views/screens/comic_details/local_widget/detail_comic.dart';
-import 'package:comic_app/views/screens/comic_details/local_widget/header_of_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/comic_controller/comic_controller.dart';
+import 'local_widget/detail_comic.dart';
+import 'local_widget/header_of_screen.dart';
+import 'local_widget/list_of_chap.dart';
 
 class ComicDetailScreen extends StatefulWidget {
   @override

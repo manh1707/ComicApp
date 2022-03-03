@@ -3,7 +3,6 @@ import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
 import 'package:comic_app/models/comic_model.dart';
 import 'package:comic_app/models/comment_model.dart';
 import 'package:comic_app/themes.dart';
-import 'package:comic_app/views/screens/comic_details/local_widget/components/list_of_comment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

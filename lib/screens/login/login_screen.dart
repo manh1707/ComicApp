@@ -1,6 +1,4 @@
 import 'package:comic_app/main.dart';
-import 'package:comic_app/views/screens/login/local_widget/email_text_field.dart';
-import 'package:comic_app/views/screens/login/local_widget/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

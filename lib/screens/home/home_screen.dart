@@ -1,11 +1,11 @@
 import 'package:comic_app/main.dart';
 import 'package:comic_app/themes.dart';
-import 'package:comic_app/views/screens/home/local_widget/comic_listview.dart';
-import 'package:comic_app/views/screens/home/local_widget/update_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'local_widget/comic_listview.dart';
 import 'local_widget/tab_view.dart';
+import 'local_widget/update_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -89,7 +89,9 @@ class HomeScreen extends StatelessWidget {
                             'Xem Tất cả >>>',
                             style: Mytheme.textLogin,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed(Routes.search);
+                          },
                         ),
                       ],
                     ),

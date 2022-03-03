@@ -1,10 +1,10 @@
 import 'package:comic_app/controllers/auth_controller/auth_controller.dart';
-import 'package:comic_app/views/screens/comic_details/comic_details_screen.dart';
-import 'package:comic_app/views/screens/login/login_screen.dart';
-import 'package:comic_app/views/screens/login/signup_screen.dart';
-import 'package:comic_app/views/screens/read_comic/read_comic.dart';
-import 'package:comic_app/views/screens/root.dart';
-import 'package:comic_app/views/screens/search/search_screen.dart';
+import 'package:comic_app/screens/comic_details/comic_details_screen.dart';
+import 'package:comic_app/screens/login/login_screen.dart';
+import 'package:comic_app/screens/login/signup_screen.dart';
+import 'package:comic_app/screens/read_comic/read_comic.dart';
+import 'package:comic_app/screens/root.dart';
+import 'package:comic_app/screens/search/search_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

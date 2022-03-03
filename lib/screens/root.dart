@@ -1,5 +1,5 @@
 import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
-import 'package:comic_app/views/screens/widget/loading_indicator.dart';
+import 'package:comic_app/screens/widget/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

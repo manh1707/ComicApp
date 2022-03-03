@@ -1,10 +1,9 @@
 import 'package:comic_app/main.dart';
 import 'package:comic_app/models/comic_model.dart';
-import 'package:comic_app/views/screens/home/local_widget/comic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../controllers/comic_controller/comic_controller.dart';
+import 'comic_item.dart';
 
 class Updatelist extends StatelessWidget {
   const Updatelist({Key? key}) : super(key: key);
