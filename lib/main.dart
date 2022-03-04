@@ -5,6 +5,7 @@ import 'package:comic_app/screens/login/signup_screen.dart';
 import 'package:comic_app/screens/read_comic/read_comic.dart';
 import 'package:comic_app/screens/root.dart';
 import 'package:comic_app/screens/search/search_screen.dart';
+import 'package:comic_app/screens/splash/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       themeMode: ThemeMode.system,
       getPages: routePages,
-      initialRoute: Routes.root,
+      initialRoute: Routes.splash,
     );
   }
 }
@@ -45,6 +46,7 @@ abstract class Routes {
   static const login = '/login';
   static const signup = '/signup';
   static const search = '/search';
+  static const splash = '/splash';
 }
 
 final routePages = [
@@ -54,6 +56,7 @@ final routePages = [
   GetPage(name: Routes.login, page: () => LoginScreen()),
   GetPage(name: Routes.signup, page: () => RegisterScreen()),
   GetPage(name: Routes.search, page: () => SearchScreen()),
+  GetPage(name: Routes.splash, page: () => SplashScreen())
 ];
 
 class RootBinding extends Bindings {

@@ -1,9 +1,10 @@
-import 'package:comic_app/views/screens/favorite/favorite_screen.dart';
-import 'package:comic_app/views/screens/history/history_screen.dart';
-import 'package:comic_app/views/screens/home/home_screen.dart';
-import 'package:comic_app/views/screens/profile/account_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+import '../../screens/favorite/favorite_screen.dart';
+import '../../screens/history/history_screen.dart';
+import '../../screens/home/home_screen.dart';
+import '../../screens/profile/account_screen.dart';
 
 class RootController extends GetxController {
   int _tabIndex = 0;

@@ -23,7 +23,7 @@ class SearchScreen extends StatelessWidget {
               TextField(
                 controller: textEditingController,
                 onChanged: (value) {
-                  comicController.findByName(value);
+                  comicController.findByName(value.toLowerCase());
                 },
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search),

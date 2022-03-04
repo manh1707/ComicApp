@@ -108,7 +108,7 @@ class AccountScreen extends StatelessWidget {
                       TextButton.icon(
                           onPressed: () {
                             Get.defaultDialog(
-                                title: 'Bạn có chắc muốn thoát không',
+                                title: 'Bạn có chắc muốn đăng xuất không',
                                 content: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,

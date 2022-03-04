@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import 'components/list_of_comment.dart';
+
 class DetailComic extends StatelessWidget {
   final String decription;
   final List<CommentModel> comments;

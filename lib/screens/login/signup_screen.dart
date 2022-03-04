@@ -2,6 +2,11 @@ import 'package:comic_app/controllers/auth_controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'local_widget/confirm_pass_field.dart';
+import 'local_widget/email_text_field.dart';
+import 'local_widget/name_field.dart';
+import 'local_widget/password_field.dart';
+
 class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();

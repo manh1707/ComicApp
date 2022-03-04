@@ -1,6 +1,18 @@
 # comic_app
+Manga app written in flutter and using firebase as back-end
+Some funtion in my app:
+- SignIn/SignUp
+- Show detail of comic
+- Read comic
+- Comment 
+- Follow comic
+- Save read history
+- Search comic by name
+Some picture about my app:
 
-A new Flutter project.
+
+
+
 
 ## Getting Started
 

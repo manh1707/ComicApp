@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/auth_controller/auth_controller.dart';
+import 'local_widget/email_text_field.dart';
+import 'local_widget/password_field.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
