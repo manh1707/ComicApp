@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:comic_app/models/comment_model.dart';
 import 'package:comic_app/services/api_service.dart';
@@ -71,6 +70,15 @@ class ComicController extends GetxController {
 
   ComicModel findComicByID(String id) {
     return comicList.firstWhere((element) => element.id == id);
+  }
+
+  Future<void> updateChapView(ComicModel comicModel, int chapIndex) async {
+    int index = comicList.indexWhere((element) => element.id == comicModel.id);
+    comicList[index].chaps[chapIndex].increChapView();
+
+    ApiService().updateChapview(
+        comicModel.id, chapIndex, comicList[index].chaps[chapIndex].chapView);
+    update();
   }
 
   Future<void> fetchAllComic() async {

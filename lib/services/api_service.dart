@@ -66,4 +66,16 @@ class ApiService {
     var responce = await http.patch(url, body: body);
     return responce;
   }
+
+  Future<void> updateChapview(
+      String comicID, int chapIndex, int newView) async {
+    final Uri url = Uri.parse(ApiUrl().API_URL +
+        'comic/' +
+        comicID +
+        "/chap/" +
+        chapIndex.toString() +
+        ".json");
+    var body = json.encode({'chapView': newView});
+    await http.patch(url, body: body);
+  }
 }

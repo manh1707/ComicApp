@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:comic_app/main.dart';
 import 'package:comic_app/themes.dart';
 import 'package:flutter/material.dart';

@@ -46,17 +46,6 @@ class ComicModel {
     return comments.length;
   }
 
-  int get totalView {
-    int view = 0;
-    if (chaps.isNotEmpty)
-
-      // ignore: curly_braces_in_flow_control_structures
-      for (var element in chaps) {
-        view += element.chapView!;
-      }
-    return view;
-  }
-
   factory ComicModel.fromJson(id, Map<String, dynamic> map) {
     return ComicModel(
       id: id,

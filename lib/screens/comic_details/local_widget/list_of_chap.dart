@@ -60,6 +60,7 @@ class ListOfChap extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       comicController.addToHistory(comic, index);
+                      comicController.updateChapView(comic, index);
                       Get.toNamed(Routes.read, arguments: [comic, index]);
                     },
                     child: SizedBox(
@@ -88,11 +89,13 @@ class ListOfChap extends StatelessWidget {
                                     color: Colors.grey),
                               ),
                               Row(children: [
-                                Text(
-                                  listOfChap[index].chapView.toString(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.grey),
+                                GetBuilder<ComicController>(
+                                  builder: (controller) => Text(
+                                    listOfChap[index].chapView.toString(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey),
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 3,
