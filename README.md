@@ -8,7 +8,7 @@ Some funtion in my app:
 - Follow comic
 - Save read history
 - Search comic by name
-Some picture about my app:
+- Some picture about my app:
 ![1](https://user-images.githubusercontent.com/90319470/156711195-417321e6-1991-44e3-ad97-54d6a4d697e2.png)
 ![2](https://user-images.githubusercontent.com/90319470/156711392-2f96dd02-ce70-403d-a23b-6fa9fb00816f.png)
 ![3](https://user-images.githubusercontent.com/90319470/156711524-0c9f19b3-a125-45ba-8112-de5e16cc0710.png)
