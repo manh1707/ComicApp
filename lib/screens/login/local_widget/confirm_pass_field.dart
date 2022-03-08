@@ -33,6 +33,5 @@ class ConfirmPassField extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
-    ;
   }
 }

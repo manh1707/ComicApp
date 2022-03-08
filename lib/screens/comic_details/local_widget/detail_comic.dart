@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:comic_app/controllers/auth_controller/auth_controller.dart';
 import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
 import 'package:comic_app/models/comic_model.dart';
@@ -79,7 +81,8 @@ class DetailComic extends StatelessWidget {
                     : GetBuilder<AuthController>(
                         builder: (controller) {
                           bool isFavorite =
-                              controller.currentUser.value.isFavorite(id);
+                              controller.currentUser.value.isFavorite(comicID);
+
                           return InkWell(
                             onTap: () {
                               if (isFavorite == true) {
@@ -142,22 +145,87 @@ class DetailComic extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Comment',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700),
+                GetBuilder<ComicController>(
+                  builder: (controller) => Text(
+                    'Comment (${controller.findComicByID(comicID).comments.length})',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
-                Row(
-                  children: const [
-                    Text('⭐️⭐️⭐️⭐️⭐️'),
-                    Icon(
-                      CupertinoIcons.pencil,
-                      size: 20,
-                    )
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Container(
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20)),
+                              height:
+                                  max(300, MediaQuery.of(context).size.height) *
+                                      0.3,
+                              child: Stack(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Đánh giá truyện",
+                                        style: Mytheme.textLogin.copyWith(
+                                            fontSize: 18, color: Colors.red),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: List.generate(
+                                            5,
+                                            (index) => IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(
+                                                  Icons.star,
+                                                  color: Colors.red,
+                                                ))),
+                                      ),
+                                    ],
+                                  ),
+                                  Positioned(
+                                      bottom: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(
+                                        color: Colors.red,
+                                        child: MaterialButton(
+                                          onPressed: (() {}),
+                                          child: Text(
+                                            'Done',
+                                            style: Mytheme.textLogin
+                                                .copyWith(color: Colors.white),
+                                          ),
+                                        ),
+                                      ))
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
+                  child: Row(
+                    children: const [
+                      Text(
+                        '⭐️⭐️⭐️⭐️⭐️',
+                      ),
+                      Icon(
+                        CupertinoIcons.pencil,
+                        size: 20,
+                      )
+                    ],
+                  ),
                 )
               ],
             ),

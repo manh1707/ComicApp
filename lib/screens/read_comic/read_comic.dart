@@ -3,6 +3,7 @@ import 'package:comic_app/models/chap_model.dart';
 import 'package:comic_app/models/comic_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:transparent_image/transparent_image.dart';
 import '../../../main.dart';
 
 class ReadComicScreen extends StatelessWidget {
@@ -52,23 +53,23 @@ class ReadComicScreen extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: listOfImage.length,
               itemBuilder: (context, index) {
-                // return FadeInImage.memoryNetwork(
-                //     placeholder: kTransparentImage, image: listOfImage[index]);
-                return Image.network(
-                  listOfImage[index],
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
-                    );
-                  },
-                );
+                return FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage, image: listOfImage[index]);
+                // return Image.network(
+                //   listOfImage[index],
+                //   fit: BoxFit.cover,
+                //   loadingBuilder: (context, child, loadingProgress) {
+                //     if (loadingProgress == null) return child;
+                //     return Center(
+                //       child: CircularProgressIndicator(
+                //         value: loadingProgress.expectedTotalBytes != null
+                //             ? loadingProgress.cumulativeBytesLoaded /
+                //                 loadingProgress.expectedTotalBytes!
+                //             : null,
+                //       ),
+                //     );
+                //   },
+                // );
               }),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

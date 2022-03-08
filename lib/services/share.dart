@@ -7,7 +7,7 @@ class History {
     return count;
   }
 
-  Future<int?> saveHistory(String comicID, int chapIndex) async {
+  Future<void> saveHistory(String comicID, int chapIndex) async {
     SharedPreferences _pres = await SharedPreferences.getInstance();
     await _pres.setInt(comicID, chapIndex);
   }

@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                             style: Mytheme.textLogin,
                           ),
                           onTap: () {
-                            Get.toNamed(Routes.search);
+                            // Get.toNamed(Routes.search);
                           },
                         ),
                       ],

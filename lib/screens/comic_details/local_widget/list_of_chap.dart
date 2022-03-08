@@ -1,17 +1,36 @@
 import 'package:comic_app/controllers/comic_controller/comic_controller.dart';
 import 'package:comic_app/main.dart';
+import 'package:comic_app/models/chap_model.dart';
 import 'package:comic_app/models/comic_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ListOfChap extends StatelessWidget {
+class ListOfChap extends StatefulWidget {
   ListOfChap({Key? key, required this.comic}) : super(key: key);
   ComicModel comic;
 
   @override
+  State<ListOfChap> createState() => _ListOfChapState();
+}
+
+class _ListOfChapState extends State<ListOfChap> {
+  bool isNew = false;
+  void changeToNew() {
+    setState(() {
+      isNew = true;
+    });
+  }
+
+  void changeToOld() {
+    setState(() {
+      isNew = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final listOfChap = comic.chaps;
-    bool isNew = false;
+    List<ChapModel> listOfChap = widget.comic.chaps;
+
     ComicController comicController = Get.find();
     return SingleChildScrollView(
       child: Padding(
@@ -31,7 +50,9 @@ class ListOfChap extends StatelessWidget {
                 Row(
                   children: [
                     GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          changeToOld();
+                        },
                         child: Text(
                           'Cũ nhất',
                           style: TextStyle(
@@ -43,7 +64,9 @@ class ListOfChap extends StatelessWidget {
                       width: 10,
                     ),
                     GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          changeToNew();
+                        },
                         child: Text('Mới nhất ',
                             style: TextStyle(
                                 color: (isNew == true)
@@ -59,9 +82,10 @@ class ListOfChap extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                     onTap: () {
-                      comicController.addToHistory(comic, index);
-                      comicController.updateChapView(comic, index);
-                      Get.toNamed(Routes.read, arguments: [comic, index]);
+                      comicController.addToHistory(widget.comic, index);
+                      comicController.updateChapView(widget.comic, index);
+                      Get.toNamed(Routes.read,
+                          arguments: [widget.comic, index]);
                     },
                     child: SizedBox(
                       height: 50,

@@ -38,12 +38,12 @@ class AuthController extends GetxController {
 
   Future<void> addFavorite(
       String comicID, List<String>? favoriteList, String userID) async {
+    currentUser.value.favoriteComic!.add(comicID);
     var response = await ApiService().addFavoriteComic(
       favoriteList,
       userID,
     );
     if (response.statusCode == 200) {
-      currentUser.value.favoriteComic!.add(comicID);
       Get.snackbar('Thông báo', "Đã thêm vào danh sách theo dõi");
     } else {
       Get.snackbar('Error', "Co loi xay ra");
@@ -53,12 +53,12 @@ class AuthController extends GetxController {
 
   void removeFavorite(
       String comicID, List<String>? favoriteList, String userID) async {
+    currentUser.value.favoriteComic!.remove(comicID);
     var response = await ApiService().addFavoriteComic(
       favoriteList,
       userID,
     );
     if (response.statusCode == 200) {
-      currentUser.value.favoriteComic!.remove(comicID);
       Get.snackbar('Thông báo', "Bỏ theo dõi truyện");
     } else {
       Get.snackbar('Error', "Co loi xay ra");
