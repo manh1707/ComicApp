@@ -9,8 +9,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
+import 'package:rating_dialog/rating_dialog.dart';
 import 'components/list_of_comment.dart';
+import 'components/rating_star.dart';
 
 class DetailComic extends StatelessWidget {
   final String decription;
@@ -158,68 +159,49 @@ class DetailComic extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     showDialog(
-                        context: context,
-                        builder: (context) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Container(
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20)),
-                              height:
-                                  max(300, MediaQuery.of(context).size.height) *
-                                      0.3,
-                              child: Stack(
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Đánh giá truyện",
-                                        style: Mytheme.textLogin.copyWith(
-                                            fontSize: 18, color: Colors.red),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: List.generate(
-                                            5,
-                                            (index) => IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(
-                                                  Icons.star,
-                                                  color: Colors.red,
-                                                ))),
-                                      ),
-                                    ],
-                                  ),
-                                  Positioned(
-                                      bottom: 0,
-                                      left: 0,
-                                      right: 0,
-                                      child: Container(
-                                        color: Colors.red,
-                                        child: MaterialButton(
-                                          onPressed: (() {}),
-                                          child: Text(
-                                            'Done',
-                                            style: Mytheme.textLogin
-                                                .copyWith(color: Colors.white),
-                                          ),
-                                        ),
-                                      ))
-                                ],
-                              ),
-                            ),
-                          );
-                        });
+                      context: context,
+                      barrierDismissible:
+                          true, // set to false if you want to force a rating
+                      builder: (context) => RatingDialog(
+                        initialRating: 1.0,
+                        title: Text(
+                          'Đánh giá truyện',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        enableComment: false,
+                        message: Text(
+                          'Chọn mức sao mà bạn muốn cho sự hài lòng của bạn',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                        submitButtonText: 'Xác nhận',
+                        onSubmitted: (response) {
+                          comicController.ratingComic(
+                              comicModel, response.rating);
+                        },
+                      ),
+                    );
                   },
                   child: Row(
-                    children: const [
-                      Text(
-                        '⭐️⭐️⭐️⭐️⭐️',
-                      ),
+                    children: [
+                      GetBuilder<ComicController>(builder: (controller) {
+                        return (controller
+                                .findComicByID(comicModel.id)
+                                .rating
+                                .isEmpty)
+                            ? Text('Chưa có đánh giá')
+                            : RatingStars(controller
+                                    .findComicByID(comicModel.id)
+                                    .ratingStar /
+                                controller
+                                    .findComicByID(comicModel.id)
+                                    .rating
+                                    .length);
+                      }),
                       Icon(
                         CupertinoIcons.pencil,
                         size: 20,

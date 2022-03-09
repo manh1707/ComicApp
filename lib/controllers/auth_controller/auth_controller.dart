@@ -114,6 +114,7 @@ class AuthController extends GetxController {
           Future.delayed(const Duration(seconds: 1), () {
             Get.snackbar('Thông báo', 'Đăng Nhập thành công');
           });
+
           Get.offAllNamed(Routes.root);
           isAuth(true);
           update();

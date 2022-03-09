@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:comic_app/models/comic_model.dart';
 import 'package:comic_app/models/comment_model.dart';
 import 'package:comic_app/models/user.dart';
 import 'package:comic_app/services/api_url.dart';
@@ -49,6 +50,14 @@ class ApiService {
     var body =
         json.encode(List<dynamic>.from(commentModel.map((e) => e.toJson())));
     var response = await http.put(url, body: body);
+    return response;
+  }
+
+  Future<dynamic> AddRating(ComicModel comicModel) async {
+    final Uri uri = Uri.parse(ApiUrl().comicRatingURL(comicModel.id));
+    var body = json.encode(comicModel.rating);
+    var response = await http.put(uri, body: body);
+
     return response;
   }
 

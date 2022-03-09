@@ -10,6 +10,7 @@ class ComicModel {
   List<ChapModel> chaps;
   DateTime upDateDay;
   String hotImage;
+  List<double> rating;
   List<CommentModel> comments;
   bool isDone;
   ComicModel({
@@ -19,6 +20,7 @@ class ComicModel {
     required this.imageURL,
     required this.author,
     required this.comments,
+    required this.rating,
     required this.hotImage,
     required this.chaps,
     required this.upDateDay,
@@ -46,6 +48,14 @@ class ComicModel {
     return comments.length;
   }
 
+  double get ratingStar {
+    double totalStar = 0;
+    rating.forEach((element) {
+      totalStar += element;
+    });
+    return totalStar;
+  }
+
   factory ComicModel.fromJson(id, Map<String, dynamic> map) {
     return ComicModel(
       id: id,
@@ -54,6 +64,9 @@ class ComicModel {
       imageURL: map['imageURL'],
       hotImage: map['hotImage'],
       author: map['author'] ?? " ",
+      rating: (map['rating'] == null)
+          ? []
+          : List<double>.from(map['rating'].map((x) => x)),
       chaps:
           List<ChapModel>.from(map['chap'].map((x) => ChapModel.fromJson(x))),
       upDateDay: map['updateDay'] ?? DateTime.now(),

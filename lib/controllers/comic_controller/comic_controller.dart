@@ -81,10 +81,23 @@ class ComicController extends GetxController {
     update();
   }
 
+  Future<void> ratingComic(ComicModel comicModel, double rating) async {
+    int index = comicList.indexWhere((element) => element.id == comicModel.id);
+    comicList[index].rating.add(rating);
+    var response = await ApiService().AddRating(comicModel);
+    if (response.statusCode == 200) {
+      Get.snackbar('Thông báo', 'Thêm đánh giá thành công');
+    } else {
+      Get.snackbar('Thông báo', 'Thêm đánh giá thất bại');
+    }
+    update();
+  }
+
   Future<void> fetchAllComic() async {
     try {
       isLoading(true);
       var response = await ApiService().fetchComic();
+
       if (response.statusCode == 200) {
         final extraData = json.decode(response.body) as Map<String, dynamic>;
         extraData.forEach((id, data) {
