@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:comic_app/main.dart';
 import 'package:comic_app/models/user.dart';
 import 'package:comic_app/services/api_service.dart';
@@ -127,6 +129,25 @@ class AuthController extends GetxController {
           print(e.toString());
         }
       });
+    }
+  }
+
+  Future<void> editProfile(
+    String? imageURl,
+    String? newName,
+  ) async {
+    if (imageURl != null) {
+      currentUser.value.avatarURl = imageURl;
+    }
+    if (newName != null) {
+      currentUser.value.userName = newName;
+    }
+    update();
+    var response = await ApiService().editprofile(currentUser.value);
+    if (response.statusCode == 200) {
+      Get.snackbar('Thông báo ', "Chỉnh sửa thông tin thành công");
+    } else {
+      Get.snackbar('Thông báo ', "Có lỗi xảy ra");
     }
   }
 

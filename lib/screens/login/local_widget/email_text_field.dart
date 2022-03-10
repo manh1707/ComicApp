@@ -13,7 +13,7 @@ class EmailTextField extends StatelessWidget {
         if (value!.isEmpty) {
           return "Please enter your email";
         }
-        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+        if (!RegExp("^[a-zA-Z0-9+_.-]+@gmail").hasMatch(value)) {
           return ("Please Enter a valid email");
         }
         return null;
@@ -29,6 +29,5 @@ class EmailTextField extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
-    ;
   }
 }

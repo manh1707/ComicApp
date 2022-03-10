@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      'Có thể bạn sẽ thích ',
+                      'Phân loại',
                       style: Mytheme.textLogin,
                     ),
                   ]),

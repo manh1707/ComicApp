@@ -45,6 +45,7 @@ class Root extends StatelessWidget {
                     _bottomNavigationItem(Icons.home, 'Trang Chủ'),
                     _bottomNavigationItem(Icons.history, 'Lịch sử đọc'),
                     _bottomNavigationItem(Icons.favorite, 'Yêu thích'),
+                    _bottomNavigationItem(Icons.bookmark, 'Forum'),
                     _bottomNavigationItem(Icons.person, 'Tài khoản')
                   ],
                 ),

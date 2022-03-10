@@ -1,5 +1,6 @@
 import 'package:comic_app/controllers/auth_controller/auth_controller.dart';
 import 'package:comic_app/screens/comic_details/comic_details_screen.dart';
+import 'package:comic_app/screens/edit_profile/edit_profile_screen.dart';
 import 'package:comic_app/screens/login/login_screen.dart';
 import 'package:comic_app/screens/login/signup_screen.dart';
 import 'package:comic_app/screens/read_comic/read_comic.dart';
@@ -47,6 +48,7 @@ abstract class Routes {
   static const signup = '/signup';
   static const search = '/search';
   static const splash = '/splash';
+  static const editProfile = '/editProfile';
 }
 
 final routePages = [
@@ -56,7 +58,8 @@ final routePages = [
   GetPage(name: Routes.login, page: () => LoginScreen()),
   GetPage(name: Routes.signup, page: () => RegisterScreen()),
   GetPage(name: Routes.search, page: () => SearchScreen()),
-  GetPage(name: Routes.splash, page: () => SplashScreen())
+  GetPage(name: Routes.splash, page: () => SplashScreen()),
+  GetPage(name: Routes.editProfile, page: () => EditProfileScreen())
 ];
 
 class RootBinding extends Bindings {

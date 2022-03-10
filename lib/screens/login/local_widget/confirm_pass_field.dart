@@ -20,7 +20,7 @@ class ConfirmPassField extends StatelessWidget {
       },
       validator: (value) {
         // ignore: unrelated_type_equality_checks
-        if (confirmpassController.text.length == passController.text) {
+        if (confirmpassController.text != passController.text) {
           return 'Mật khẩu không trùng khớp';
         }
         return null;

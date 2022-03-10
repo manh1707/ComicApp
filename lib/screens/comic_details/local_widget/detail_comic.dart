@@ -211,17 +211,20 @@ class DetailComic extends StatelessWidget {
                 )
               ],
             ),
-            (comments.isEmpty)
-                ? const Center(
-                    child: Text(
-                    'Chưa có bình luận',
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w700),
-                  ))
-                : GetBuilder<ComicController>(
-                    builder: (controller) => ListOfComment(
+            GetBuilder<ComicController>(
+                builder: (controller) => (comicController
+                        .findComicByID(comicID)
+                        .comments
+                        .isEmpty)
+                    ? const Center(
+                        child: Text(
+                        'Chưa có bình luận',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700),
+                      ))
+                    : ListOfComment(
                         commentList:
                             comicController.findComicByID(comicID).comments)),
             const SizedBox(

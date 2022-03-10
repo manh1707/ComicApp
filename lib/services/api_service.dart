@@ -72,7 +72,15 @@ class ApiService {
   Future<dynamic> postDetailToFirestore(UserModel userModel, String uid) async {
     final Uri url = Uri.parse(ApiUrl().API_URL + "user/" + uid + ".json");
     var body = json.encode(userModel.toJson());
-    var responce = await http.patch(url, body: body);
+    var responce = await http.put(url, body: body);
+    return responce;
+  }
+
+  Future<dynamic> editprofile(UserModel userModel) async {
+    final Uri url = Uri.parse(
+        ApiUrl().API_URL + "user/" + userModel.id.toString() + ".json");
+    var body = json.encode(userModel.toJson());
+    var responce = await http.put(url, body: body);
     return responce;
   }
 

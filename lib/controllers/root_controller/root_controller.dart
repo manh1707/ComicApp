@@ -1,3 +1,4 @@
+import 'package:comic_app/screens/forum/forum_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,7 @@ class RootController extends GetxController {
     HomeScreen(),
     HistoryScreen(),
     FavoriteScreen(),
+    ForumScreen(),
     AccountScreen(),
   ];
 
