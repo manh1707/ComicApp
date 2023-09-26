@@ -1,6 +1,6 @@
 # comic_app
 Manga app written in flutter and using firebase as back-end
-Some funtion in my app:
+Some funtionality in my app:
 - SignIn/SignUp
 - Show detail of comic
 - Read comic
